@@ -1,6 +1,6 @@
 package com.company.department.domain;
 
-public abstract class Employee {
+public abstract class Employee implements PaymentService {
 
     private String firstName;
     private String secondName;

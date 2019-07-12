@@ -1,8 +1,5 @@
 package com.company.department.domain;
 
-import com.company.department.domain.Developer;
-import com.company.department.domain.Employee;
-
 import java.util.ArrayList;
 import java.util.List;
 
