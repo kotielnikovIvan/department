@@ -2,18 +2,27 @@ package com.company.department.domain;
 
 public class Designer extends Employee {
 
-    private int coeficient;
+    private boolean coefficient;
 
-    public int getCoeficient() {
-        return coeficient;
+    public boolean isCoefficient() {
+        return coefficient;
     }
 
-    public void setCoeficient(int coeficient) {
-        this.coeficient = coeficient;
+    public void setCoefficient(boolean coefficient) {
+        this.coefficient = coefficient;
     }
 
-    public double getPayment(){
-        setSalary(super.getPayment() * coeficient);
+    @Override
+    public boolean isTeamMember() {
+        return true;
+    }
+
+    public int getPayment() {
+        if (coefficient) {
+            setSalary(super.getPayment() * 1);
+            return getSalary();
+        }
+        setSalary(0);
         return getSalary();
     }
 }

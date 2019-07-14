@@ -15,34 +15,40 @@ public class Manager extends Employee {
         this.team = team;
     }
 
-    public void addToTeamm(Employee employee){
-        if(employee instanceof Designer || employee instanceof Developer)
-        team.add(employee);
+    @Override
+    public boolean isTeamMember() {
+        return false;
     }
 
-    public void removeFromTeam(Employee employee){
-        team.remove(employee);
+    public void addToTeam(Employee employee) {
+        if (employee.isTeamMember())
+            team.add(employee);
     }
 
-    public double getPayment() {
+    public void removeFromTeam(Employee employee) {
+        if (!team.isEmpty() && team != null)
+            team.remove(employee);
+    }
 
+    public int getPayment() {
         int amountOfDevelopers = countDevelopers();
-        if (team.size() > 5 && team.size() < 10) {
-            setSalary(super.getPayment() + 200);
-        } else if (team.size() > 10) {
-            setSalary(super.getPayment() + 300);
-        } else if (amountOfDevelopers > (team.size() / 2)) {
-            setSalary(super.getSalary() * 1.1);
-        }
+        if (team.size() <= 5 && amountOfDevelopers <= team.size() / 2)
+            return super.getPayment();
+
+        int salary = super.getPayment();
+        salary = (team.size() > 5 && team.size() <= 10) ? salary + 200 : salary + 300;
+        setSalary(salary);
+
+        if (amountOfDevelopers > team.size() / 2)
+            setSalary((int) (salary * 1.1));
         return getSalary();
     }
 
-    private int countDevelopers(){
+    private int countDevelopers() {
         int amountOfDevelopers = 0;
         for (Employee emp : team) {
             amountOfDevelopers = emp instanceof Developer ? amountOfDevelopers++ : amountOfDevelopers;
         }
         return amountOfDevelopers;
     }
-
 }
